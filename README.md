@@ -1,12 +1,11 @@
 # Grammar_Extension_Agentless
 This extension enables Grammarly to function inside **Google Colab**, making it easier to refine your writing.
 ### **How to Get Started**
-:one: **Install the Grammarly Extension** (if you haven’t already). Then, sign in or create an account.
+:one: **Install the Grammarly Extension** (if you haven't already). Then, sign in or create an account.
 
-:two: **Download the Turing Grammar Checker - Agentless** zip file. Then:
-  - Unzip the file.
+:two: **Clone the Repo into a folder that will include only the Repository**. Then:
   - Open Google Chrome and go to `chrome://extensions/`.
   - Enable Developer Mode, which is located in the top right corner.
   - Click on `Load Unpacked` and select the unzipped folder.
 
-:three: **Open Google Colab** and you’re all set! Click on the loaded extension when you want to check your work.
+:three: **Open Google Colab** and you're all set! Click on the loaded extension when you want to check your work.
