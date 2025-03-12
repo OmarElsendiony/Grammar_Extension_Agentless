@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#check_grammar_btn{
+    /* font-weight: bold; */
+    /* padding: 10px; */
+    color: white;
+    width: 100px;
+    border-radius: 5px;
+    transition: 0.5s;
+    background-color: #04c88a;
+    box-shadow: 0 0 10px #07a74c;
+    cursor: pointer;
+}
+
+#check_grammar_btn:hover{
+    background-color: #07a74c;
+    box-shadow: 0 0 10px #04c88a;
+}
+
+
+/* ********************************************************* */
+
+#form_grammar{
+    position: absolute;
+    top: 7%;
+    left: 25%;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    height: 90%;
+    border-radius: 5px;
+    background-color: black;
+    box-shadow: 0 0 10px #000;
+    z-index: 100;
+}
+
+#cell_content_grammar{
+    margin: 10px 0px;
+    padding: 10px;
+    font-size: normal;
+    width: 100%;
+    height: 80%;
+    border-radius: 5px;
+    color: black;
+    background-color: lightgrey;
+    box-shadow: 0 0 10px #000;
+    z-index: 100;
+}
+
+#cancel_btn_grammar, #save_btn_grammar{
+    position: absolute;
+    bottom: 10px;
+    font-weight: bold;
+    /* font-size: large; */
+    /* margin: 10px; */
+    padding: 10px;
+    width: 90px;
+    border-radius: 5px;
+    transition: 0.5s;
+    /* background-color: #5555;
+    box-shadow: 0 0 10px #000; */
+}
+
+#cancel_btn_grammar{
+    left: 18px;
+}
+
+#save_btn_grammar{
+    right: 18px;
+}
+
+#cancel_btn_grammar:hover, #save_btn_grammar:hover{
+    cursor: pointer;
+}
+
+#save_btn_grammar:hover{
+    background-color: #14c804;
+    box-shadow: 0 0 10px #000;
+}
+
+#cancel_btn_grammar:hover{
+    background-color: #c80704;
+    box-shadow: 0 0 10px #000;
+}
+
+/* ******************** MARKDOWN ********************* */
+
+#mark_down_viewer_btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    transition: 0.5s;
+    background-color: #04c88a;
+    box-shadow: 0 0 10px #07a74c;
+    cursor: pointer;
+}
+
+#markdown_form{
+    margin: auto;
+    margin-top: 10px;
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    overflow: scroll;
+    box-shadow: 0 0 10px #000;
+    z-index: 99;
+}
+
+#markdown_form *{
+    color: black;
+}
+
+code > *{
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+section{
+    border: #000 1px solid;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+section > *{
+    color: #000 !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
