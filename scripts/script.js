@@ -105,17 +105,15 @@ function grammar_checker_logic(logoURL) {
         markdownFormElement = document.createElement('div');
         markdownFormElement.setAttribute('id', 'markdown_form');
 
+        ///////////////////////// Formatting MarkDown ////////////////////////////
         var htmlText = editorWindow.value;
-        // htmlText = htmlText.replace(/\n/g, '</div><div>');
-        // dotpyInstances = htmlText.match(/\b(?!\`)(\w|\/)+\.py(?!\`)\b/g);
-        // console.log(dotpyInstances);
 
-        htmlText = htmlText.replace(/\b(?!\`)(([\w\/]+\.py))(?!\`)\b/g, '<span style="text-decoration:underline; color:red">$1</span>');
+        // file names
+        htmlText = htmlText.replace(/\b(?!\`|\*)(([\w\/]+\.py))(?!\`|\*)\b/g, '<span style="text-decoration:underline; color:red">$1</span>');
 
-        // htmlText = htmlText.replace(/\b(?!(?:The|This|There|A|An|And|But|Or|For|Nor|Yet|So|At|By|In|Of|On|To|With|Therefore|Hence|Since|^|^ |\.|\. |\>|\\n)\b(?!\`))([A-Z][a-zA-Z]*)(?!\`)\b/g, '<u>$1</u>');
-        console.log(htmlText);
+        // Class Names that start with Upper Case or Camel Case Words
         htmlText = htmlText.replace(
-            /(\s|^)(?!\b(?:The|This|There|A|An|And|But|Or|For|Nor|Yet|So|At|By|In|Of|On|To|With|Therefore|Hence|Since|I|You|He|She|It|We|They|However|Thus|After|Despite)\b)(\b[A-Z][a-zA-Z]*\b)(?!`)/g,
+            /(\s|^)(?!\b(?:The|This|There|A|An|And|But|Or|For|Nor|Yet|So|At|By|In|Of|On|To|With|Therefore|Hence|Since|I|You|He|She|It|We|They|However|Thus|After|Despite|Because|After|Furthermore|Moreover|Also|Instead|If|In)\b)(\b[a-z]*[A-Z][a-zA-Z]*\b)(?!`)/g,
             function(match, prefix, word) {
                 if (/[\.\n]\s*$/.test(prefix) || /\b[A-Z][a-zA-Z]*ing\b/.test(word)) {  
                     return match;
@@ -123,17 +121,31 @@ function grammar_checker_logic(logoURL) {
                 return prefix + '<u style="text-decoration-color: yellow; text-decoration-thickness: 3px !important;">' + word + '</u>';
             }
         );
-        // console.log(htmlText);
 
-        htmlText = htmlText.replace(/^# (.*)/g, '<h1>$1</h1>');
+        // snake case is probably used in function naming
+        // htmlText = htmlText.replace(/\b(?!\`)([a-zA-Z]+_[a-zA-Z=]+[^\.])(?!\`)\b/g, '<span style="color:red">$1</span>');
+
+        // dot specification (dir.file.class.method)
+        // htmlText = htmlText.replace(/\s(?!\`)([a-z]+.[a-zA-Z]+)(?!\`)\s/g, '<span style="color:red">$1</span>');
+
+        htmlText = htmlText.replace(/###### (.*)/g, '<h6>$1</h6>'); // header 6
+        htmlText = htmlText.replace(/##### (.*)/g, '<h5>$1</h5>'); // header 5
+        htmlText = htmlText.replace(/#### (.*)/g, '<h4>$1</h4>'); // header 4
+        htmlText = htmlText.replace(/### (.*)/g, '<h3>$1</h3>'); // header 3
+        htmlText = htmlText.replace(/## (.*)/g, '<h2>$1</h2>'); // header 2
+        htmlText = htmlText.replace(/# (.*)/g, '<h1>$1</h1>'); // header 1
+
+
+        htmlText = htmlText.replace(/\`\`\`([\s\S\\n]*?)\`\`\`/g, '<section style="background-color: lightgrey; color: black;">$1</section>'); // code block
         htmlText = htmlText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // bold
-        htmlText = htmlText.replace(/\`\`\`([\s\S\\n]*?)\`\`\`/g, '<section style="background-color: lightgrey; color: black;">$1</section>'); // backticks
-        htmlText = htmlText.replace(/\`(.*?)\`/g, '<strong style="color:lightsalmon">$1</strong>'); // backticks
+        htmlText = htmlText.replace(/\*(.*?)\*/g, '<em>$1</em>'); // italic
+        htmlText = htmlText.replace(/\`(.+?)\`/g, '<strong style="color:lightsalmon">$1</strong>'); // backticks
 
+        // pre tag formats new line
         htmlText = '<pre style="font-family: sans-serif">' + htmlText + '</pre>';
+
         markdownFormElement.innerHTML = htmlText;
         formElement.insertBefore(markdownFormElement, cancelButton);
-
     });
 
     saveBtnListener.addEventListener('click', async function () {
@@ -154,9 +166,6 @@ function grammar_checker_logic(logoURL) {
         editor.executeEdits("", [{ range, text, forceMoveMarkers: true }]);
     });
     editorWindow.focus();
-    // const position = { lineNumber: 1, column: 1 };
-    // editorWindow.setPosition(position);
-    // editorWindow.revealPositionNearIfOutsideViewport(position);
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
